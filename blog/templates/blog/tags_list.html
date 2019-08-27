@@ -1,0 +1,18 @@
+{% extends "blog/base_blog.html" %}
+
+{% block title %}
+Список тегов | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<h1 style="color: red" class="mt-5">
+    Теги:
+</h1>
+{% for tag in tags %}
+<h3 style="color: red">
+    <a href="{{ tag.get_absolute_url }}">
+        {{ tag.title }}
+    </a>
+</h3>
+{% endfor %}
+{% endblock %}

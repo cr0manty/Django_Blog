@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Регистрация | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'registration_url' %}" method="POST">
+    {% include 'auth/includes/template_forms.html' %}
+    <button type="submit" class="btn btn-danger mt-3">Создать</button>
+</form>
+{% endblock %}

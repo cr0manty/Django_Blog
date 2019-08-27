@@ -1,0 +1,12 @@
+{% extends "blog/base_blog.html" %}
+
+{% block title %}
+Блог
+{% endblock %}
+
+{% block content %}
+{% for post in page.object_list %}
+{% include 'blog/includes/template_post_card.html' %}
+{% endfor %}
+{% include 'blog/includes/template_pages.html' %}
+{% endblock %}

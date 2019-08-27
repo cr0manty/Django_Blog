@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Вход | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'login_url' %}" method="POST">
+    {% include 'auth/includes/template_forms.html' %}
+    <div class="row">
+        <button type="submit" class="btn btn-danger"
+                style="margin-left:15px;">Войти
+        </button>
+        <a href="{% url 'registration_url' %}" class="btn btn-dark"
+           style="margin-left:20px;">Регистрация</a>
+        <a href="{% url 'forgot_url' %}" class="btn btn-outline-primary"
+           style="margin-left:20px;">Забыл пароль</a>
+    </div>
+</form>
+{% endblock %}
+
