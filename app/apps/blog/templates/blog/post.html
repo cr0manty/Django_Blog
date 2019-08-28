@@ -8,34 +8,37 @@
 
 <div class="card mb-4">
     <div class="card-header">
-        <h1>{{ post.title }}</h1>
+        <div class="row" style="color:white;">
+            <div class="col"><h1>{{ post.title }}</h1></div>
+            <div class="col-md-3" style="color: rgba(125, 125, 125, 1);">{{ post.date_create }}</div>
+        </div>
     </div>
     <div class="card-body">
         <p class="card-text">{{ post.body }}</p>
     </div>
     {% if comments %}
     <div class="card-footer text-muted">
-        Коментарии:
-        <div class="container mt-3">
-            <ul class="list-group list-group-flush" id="comments_list">
-                {% for comment in comments %}
-                <li class="list-group-item comment-list">
-                    <div class="row">
-                        <div class="container">
-                            <p align="left">
-                                {{ comment.author }}
-                            </p>
-                            <p align="right">
-                                {{ comment.date_create }}
-                            </p>
+        <button type="button" onclick="comment_show()" class="btn btn-link">Коментарии:</button>
+        <div id="comment-show" hidden>
+            <hr/>
+            <div class="container mt-3">
+                <ul class="list-group list-group-flush">
+                    {% for comment in comments %}
+                    <li class="list-group-item comment-list" id="comments_list">
+                        <div class="row" style="color:white;">
+                            <div class="col">{{ comment.author }}</div>
+                            <div class="col">{{ comment.date_create }}</div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-            {% endfor %}
-            <button class="btn btn-danger mt-2" onclick="comment_show()"
-                    id="add_comment">Добавить комментарий
-            </button>
+                        <hr>
+                        <p>{{ comment.text }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <button class="btn btn-danger mt-2 mb-3" onclick="comment_new_show()"
+                        id="add_comment">
+                    Добавить комментарий
+                </button>
+            </div>
         </div>
     </div>
     {% endif %}
@@ -43,31 +46,35 @@
 
 <div class="mt-5" id="post_comment" hidden>
     <div class="comment">
-        <form>
+        <form action="{% url 'post_detail_url' slug=post.slug %}" method="post">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="loginInput">Имя</label>
-                <input type="email" class="form-control" id="loginInput" placeholder="Имя пользователя">
+                <input type="text" class="form-control" id="loginInput" placeholder="Имя пользователя">
             </div>
             <div class="form-group">
                 <label for="CommentInput">Текст комментария</label>
                 <textarea class="form-control" id="CommentInput" rows="4" placeholder="Текст..."></textarea>
             </div>
-            <button type="submit" class="btn btn-danger">Отправить</button>
+            <button type="submit" class="btn btn-danger mb-5">Отправить</button>
         </form>
     </div>
 </div>
-
 {% endblock %}
-
 
 {% block script %}
 <script>
-   function comment_show() {
-    document.getElementById("post_comment").hidden = false;
-    document.getElementById("add_comment").hidden = true;
+   function comment_new_show() {
+        document.getElementById("post_comment").hidden = false;
+        document.getElementById("add_comment").hidden = true;
    }
 
-
-
+   function comment_show() {
+        var is_hidden = document.getElementById("comment-show").hidden;
+        document.getElementById("comment-show").hidden = !is_hidden;
+        if (!is_hidden && document.getElementById("post_comment").hidden) {
+            document.getElementById("post_comment").hidden = false;
+        }
+   }
 </script>
 {% endblock %}

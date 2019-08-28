@@ -138,15 +138,29 @@ a.edit, a.delete {
 }
 
 #comments_list {
-   border: 1px solid rgba(0, 0, 0, 0.09);
+   border: 1px solid rgb(81, 81, 81);
    border-radius: 1rem;
-}
-
-#post_comment {
-    border: 1px;
-    border-radius: 1rem;
+   margin-bottom: 20px;
 }
 
 .list-group-item comment-list {
 
+}
+
+.list-group-item  {
+   border: 1px;
+   border-radius: 1rem;
+   background-color: #2e2e2e;
+}
+
+hr {
+    border-top: 1px solid rgba(121, 121, 121, 0.45);
+}
+
+.text-muted {
+    color: rgba(125, 125, 125, 1)!important;
+}
+
+.card p {
+   color: white;
 }

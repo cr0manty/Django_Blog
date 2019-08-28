@@ -1,8 +1,7 @@
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import TagForm, PostForm
+from .forms import TagForm, PostForm, Comment
 from .utils import *
-from .models import Comment
 
 
 class PostCreate(LoginRequiredMixin, CreateMixin, View):
@@ -77,3 +76,14 @@ class DeleteTag(LoginRequiredMixin, DeleteMixin, View):
 def tag_list(request):
     tags = Tag.objects.all()
     return render(request, 'blog/tags_list.html', context={'tags': tags})
+
+
+class AddComment(LoginRequiredMixin, View):
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        obj = Comment(request.POST)
+        if obj.is_valid():
+            redirect('post_detail_url')
+        pass
