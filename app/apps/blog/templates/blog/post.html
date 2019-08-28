@@ -1,0 +1,73 @@
+{% extends "blog/base_blog.html" %}
+
+{% block title %}
+{{ post.title }} | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h1>{{ post.title }}</h1>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{ post.body }}</p>
+    </div>
+    {% if comments %}
+    <div class="card-footer text-muted">
+        Коментарии:
+        <div class="container mt-3">
+            <ul class="list-group list-group-flush" id="comments_list">
+                {% for comment in comments %}
+                <li class="list-group-item comment-list">
+                    <div class="row">
+                        <div class="container">
+                            <p align="left">
+                                {{ comment.author }}
+                            </p>
+                            <p align="right">
+                                {{ comment.date_create }}
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            {% endfor %}
+            <button class="btn btn-danger mt-2" onclick="comment_show()"
+                    id="add_comment">Добавить комментарий
+            </button>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="mt-5" id="post_comment" hidden>
+    <div class="comment">
+        <form>
+            <div class="form-group">
+                <label for="loginInput">Имя</label>
+                <input type="email" class="form-control" id="loginInput" placeholder="Имя пользователя">
+            </div>
+            <div class="form-group">
+                <label for="CommentInput">Текст комментария</label>
+                <textarea class="form-control" id="CommentInput" rows="4" placeholder="Текст..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-danger">Отправить</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+   function comment_show() {
+    document.getElementById("post_comment").hidden = false;
+    document.getElementById("add_comment").hidden = true;
+   }
+
+
+
+</script>
+{% endblock %}

@@ -2,6 +2,7 @@ from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import TagForm, PostForm
 from .utils import *
+from .models import Comment
 
 
 class PostCreate(LoginRequiredMixin, CreateMixin, View):
@@ -12,6 +13,7 @@ class PostCreate(LoginRequiredMixin, CreateMixin, View):
 
 class ShowPost(ShowMixin, View):
     model = Post
+    comments = Comment
     template = 'blog/post.html'
 
 

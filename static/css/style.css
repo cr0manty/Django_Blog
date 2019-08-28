@@ -1,11 +1,32 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    color: white;
+
+}
+
 .card {
     background-color: #303030!important;
+    color: white;
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    color: white;
+}
+
+.card-body {
+    background-color: #383838d4;
 }
 
 .mb-lg-2, .my-lg-2 {
     margin-bottom: -0.5rem!important;
 }
-
 
 .page-link {
     color: #dc3544;
@@ -64,6 +85,8 @@
 
 body {
     background-color: #1a1a1a;
+    margin-bottom: 60px;
+
 }
 
 .bg-dark {
@@ -86,10 +109,6 @@ body {
     transition: border-color .15s ease-in-out,box-shadow .15s
 }
 
-p, h1, h3, h5, .form-group {
-    color: white;
-}
-
 a.edit, a.delete {
     display: none;
 }
@@ -102,4 +121,34 @@ a.edit, a.delete {
     color: white;
     margin-left: 20px;
     margin-top: 10px;
+}
+
+#footer {
+    background-color: rgba(50, 50, 50, 0.83)!important;
+    margin-top: 100px;
+    color: black;
+    height: 65px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#footer a, p {
+    color: #989898;
+    text-decoration: none;
+    position: 20px;
+}
+
+#comments_list {
+   border: 1px solid rgba(0, 0, 0, 0.09);
+   border-radius: 1rem;
+}
+
+#post_comment {
+    border: 1px;
+    border-radius: 1rem;
+}
+
+.list-group-item comment-list {
+
 }

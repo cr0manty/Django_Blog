@@ -13,7 +13,7 @@ def home_page(request):
 class LoginUser(View):
     def get(self, request):
         form = LoginForm()
-        return render(request, 'auth/login.html', context={
+        return render(request, 'home/auth/login.html', context={
             'form': form
         })
 
@@ -35,7 +35,7 @@ class LoginUser(View):
 class RegisterUser(View):
     def get(self, request):
         form = RegistrationForm()
-        return render(request, 'auth/registration.html', context={
+        return render(request, 'home/auth/registration.html', context={
             'form': form
         })
 
@@ -59,7 +59,7 @@ class LogoutUser(LoginRequiredMixin, View):
 class ForgotPass(View):
     def get(self, request):
         form = ForgotPassForm()
-        return render(request, 'auth/forgot_pass.html', context={
+        return render(request, 'home/auth/forgot_pass.html', context={
             'form': form
         })
 
@@ -68,4 +68,4 @@ class ForgotPass(View):
 
 
 def about(request):
-    return render(request, 'about/about.html')
+    return render(request, 'home/about.html')
