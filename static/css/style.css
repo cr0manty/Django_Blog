@@ -8,7 +8,7 @@ html {
     min-height: 100%;
 }
 
-p, h1, h3, h5, .form-group {
+p, h1, h3, h5 {
     color: white;
 }
 
@@ -95,10 +95,6 @@ body {
     background-color: #303030!important;
     color: white;
     border: none;
-}
-
-.form-control:active {
-    color: white;
 }
 
 .form-control {
