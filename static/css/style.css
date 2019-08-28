@@ -6,20 +6,18 @@
 html {
     position: relative;
     min-height: 100%;
-}
-
-p, h1, h3, h5, .form-group {
     color: white;
 }
+
+.form-group, .dropdown-menu a, h3 {
+    color: white;
+}
+
 
 .card {
     background-color: #303030!important;
     color: white;
     border-radius: 0.5rem;
-}
-
-.card-header {
-    color: white;
 }
 
 .card-body {
@@ -39,15 +37,15 @@ p, h1, h3, h5, .form-group {
     border-radius: 1.5rem;
     max-width: 200px;
     height: 200px;
+}
 
-    }
 
 .img-thumbnail:hover {
     opacity: 0.50;
 }
 
 .page-item.disabled .page-link , .page-link {
-    background-color: #1a1a1a;
+    background-color: inherit;
     border-color: #dc3544;
 }
 
@@ -81,14 +79,9 @@ p, h1, h3, h5, .form-group {
     border: 1px solid rgba(0, 0, 0, 0.09);
 }
 
-.dropdown-menu a {
-    color: white;
-}
-
 body {
     background-color: #1a1a1a;
     margin-bottom: 60px;
-
 }
 
 .bg-dark {
@@ -143,10 +136,6 @@ a.edit, a.delete {
    margin-bottom: 20px;
 }
 
-.list-group-item comment-list {
-
-}
-
 .list-group-item  {
    border: 1px;
    border-radius: 1rem;
@@ -163,4 +152,22 @@ hr {
 
 .card p {
    color: white;
+}
+
+#comments_label {
+    color: rgba(125, 125, 125, 1);
+}
+
+#comment_post {
+    margin: 20px;
+}
+
+.modal-content {
+    background-color: #303030;
+    border: none
+}
+
+.modal-header {
+    display: block;
+    border-bottom: none
 }

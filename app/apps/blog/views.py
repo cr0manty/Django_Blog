@@ -10,9 +10,8 @@ class PostCreate(LoginRequiredMixin, CreateMixin, View):
     raise_exception = True
 
 
-class ShowPost(ShowMixin, View):
+class ShowPost(ShowPostMixin, View):
     model = Post
-    comments = Comment
     template = 'blog/post.html'
 
 
@@ -32,19 +31,7 @@ class DeletePost(LoginRequiredMixin, DeleteMixin, View):
 
 def show_posts(request):
     page = get_posts_pages(request)
-    have_pages = page.has_other_pages()
-    prev_url = '?page={}'.format(page.previous_page_number()) \
-        if page.has_previous() else ''
-    next_url = '?page={}'.format(page.next_page_number()) \
-        if page.has_next() else ''
-
-    context = {
-        'page': page,
-        'have_pages': have_pages,
-        'next_url': next_url,
-        'prev_url': prev_url
-    }
-    return render(request, 'blog/posts_list.html', context=context)
+    return render(request, 'blog/posts_list.html', context=get_pages_context(page))
 
 
 class TagCreate(LoginRequiredMixin, CreateMixin, View):
@@ -53,7 +40,7 @@ class TagCreate(LoginRequiredMixin, CreateMixin, View):
     raise_exception = True
 
 
-class ShowTag(ShowMixin, View):
+class ShowTag(ShowPostMixin, View):
     model = Tag
     template = 'blog/tag.html'
     raise_exception = True

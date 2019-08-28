@@ -9,9 +9,8 @@
 {% block content %}
 <div class="row">
     <div class="container">
-        <input class="btn btn-link" type="file">
-        <img src="{% static 'img/user-default.png' %}" alt="" class="img-thumbnail"/>
-        </input>
+        <img onclick="get_file()" id="upd_image"
+             src="{% static 'img/user-default.png' %}" class="img-thumbnail"/>
         <h1 class="username">{{ user.username|title }}</h1>
         <p> {{ user.date_joined }}</p>
         <p> {{ user.last_login }}</p>
@@ -19,4 +18,12 @@
     </div>
 
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    function get_file() {
+        document.getElementById("upd_image").click();
+    }
+</script>
 {% endblock %}

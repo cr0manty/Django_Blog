@@ -18,10 +18,31 @@ def get_posts_pages(request):
     return page
 
 
-class ShowMixin:
+def get_comments_pages(request, comments):
+    paginator = Paginator(comments, 2)
+    page_number = request.GET.get('page', 1)
+    page = paginator.get_page(page_number)
+    return page
+
+
+def get_pages_context(page):
+    have_pages = page.has_other_pages()
+    prev_url = '?page={}'.format(page.previous_page_number()) \
+        if page.has_previous() else ''
+    next_url = '?page={}'.format(page.next_page_number()) \
+        if page.has_next() else ''
+
+    return {
+        'page': page,
+        'have_pages': have_pages,
+        'next_url': next_url,
+        'prev_url': prev_url
+    }
+
+
+class ShowPostMixin:
     model = None
     template = None
-    comments = None
 
     def get(self, request, slug):
         obj = get_object_or_404(self.model, slug__iexact=slug)
@@ -30,8 +51,8 @@ class ShowMixin:
             'admin_object': obj,
             'detail': True
         }
-        if self.comments:
-            context['comments'] = obj.comment_set.all()
+        page = get_comments_pages(request, obj.comment_set.all())
+        context.update(get_pages_context(page))
         return render(request, self.template, context=context)
 
 
