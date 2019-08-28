@@ -26,16 +26,14 @@ class TagForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('slug', 'title', 'body', 'tags')
+        fields = ('title', 'body', 'tags')
         widgets = {
-            'slug': forms.TextInput(attrs={'type': 'hidden'}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
             'tags': forms.SelectMultiple(attrs={'class': 'form-control'})
         }
 
         labels = {
-            'slug': '',
             'title': 'Заголовок',
             'body': 'Текст',
             'tags': 'Теги'

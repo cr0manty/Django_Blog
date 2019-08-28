@@ -7,7 +7,7 @@ from time import time
 class Post(models.Model):
     title = models.CharField(max_length=150, db_index=True)
     slug = models.SlugField(max_length=150, blank=True, unique=True)
-    body = models.SlugField(blank=True, db_index=True)
+    body = models.TextField(blank=True, db_index=True)
     tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
     date_create = models.DateTimeField(auto_now_add=True)
 
@@ -21,7 +21,8 @@ class Post(models.Model):
         return reverse('post_delete_url', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
-        self.slug = (slugify_url(self.title) + '-' + str(int(time())))
+        if not self.id:
+            self.slug = (slugify_url(self.title) + '-' + str(int(time())))
         super().save(*args, **kwargs)
 
     def __str__(self):
