@@ -3,3 +3,4 @@ gunicorn
 django-heroku
 awesome-slugify
 Pillow
+django-jet
