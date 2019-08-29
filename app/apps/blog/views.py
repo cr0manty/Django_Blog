@@ -1,6 +1,6 @@
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import TagForm, PostForm, Comment
+from .forms import TagForm, PostForm, CommentForm
 from .utils import *
 
 
@@ -13,6 +13,7 @@ class PostCreate(LoginRequiredMixin, CreateMixin, View):
 class ShowPost(ShowPostMixin, View):
     model = Post
     template = 'blog/post.html'
+    form_comment = CommentForm
 
 
 class EditPost(LoginRequiredMixin, EditMixin, View):
@@ -24,7 +25,6 @@ class EditPost(LoginRequiredMixin, EditMixin, View):
 
 class DeletePost(LoginRequiredMixin, DeleteMixin, View):
     model = Post
-    template = 'blog/post_delete.html'
     redirect_url = 'blog_url'
     raise_exception = True
 
@@ -55,7 +55,6 @@ class EditTag(LoginRequiredMixin, EditMixin, View):
 
 class DeleteTag(LoginRequiredMixin, DeleteMixin, View):
     model = Tag
-    template = 'blog/tag_delete.html'
     redirect_url = 'tags_list_url'
     raise_exception = True
 
@@ -65,12 +64,17 @@ def tag_list(request):
     return render(request, 'blog/tags_list.html', context={'tags': tags})
 
 
-class AddComment(LoginRequiredMixin, View):
-    def get(self, request):
-        pass
+class AddComment(View):
+    def get(self, request, slug):
+        raise Http404
 
-    def post(self, request):
-        obj = Comment(request.POST)
+    def post(self, request, slug):
+        post = Post.objects.get(slug__iexact=slug)
+        obj = CommentForm(request.POST)
         if obj.is_valid():
-            redirect('post_detail_url')
-        pass
+            post.comment_set.create(
+                author=obj.cleaned_data.get('author'),
+                text=obj.cleaned_data.get('text')
+            )
+            #TODO ошибка в случае ошибки
+        return redirect(post.get_absolute_url())

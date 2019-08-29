@@ -2,6 +2,7 @@
 
 
 {% block admin-panel %}
+
 <div class="btn-group dropleft">
     <button type="button" class="btn btn-outline-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
@@ -14,6 +15,9 @@
 </div>
 <a href="{{ admin_object.get_edit_url }}" class="btn btn-outline-danger edit"
    style="{% if detail %} display: block; {% endif %} ">Изменить</a>
-<a href="{{ admin_object.get_delete_url }}" class="btn btn-danger delete"
-   style="{% if detail %} display: block; {% endif %}">Удалить</a>
+<a class="btn btn-danger delete" data-toggle="modal"
+   data-target="#modal_delete" style="{% if detail %} display: block; {% endif %}">
+    Удалить
+</a>
+
 {% endblock %}

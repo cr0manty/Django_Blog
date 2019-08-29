@@ -1,5 +1,6 @@
 {% csrf_token %}
 
+{% if form %}
 {% for field in form %}
 <div class="form-group">
     {% if field.errors %}
@@ -12,3 +13,4 @@
     {{ field }}
 </div>
 {% endfor %}
+{% endif %}

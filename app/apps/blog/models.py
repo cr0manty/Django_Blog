@@ -1,5 +1,5 @@
 from django.db import models
-from django.shortcuts import reverse
+from django.shortcuts import reverse, redirect
 from slugify import slugify_url
 from time import time
 
@@ -20,6 +20,9 @@ class Post(models.Model):
     def get_delete_url(self):
         return reverse('post_delete_url', kwargs={'slug': self.slug})
 
+    def get_comment_add_url(self):
+        return reverse('add_comment_url', kwargs={'slug': self.slug})
+    
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = (slugify_url(self.title) + '-' + str(int(time())))
@@ -30,6 +33,8 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-date_create']
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
 
 
 class Tag(models.Model):
@@ -55,6 +60,8 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ['title']
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
 
 
 class Comment(models.Model):
@@ -66,5 +73,10 @@ class Comment(models.Model):
     def __str__(self):
         return self.author
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
     class Meta:
         ordering = ['-date_create']
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Коментарии'

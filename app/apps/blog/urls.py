@@ -7,6 +7,7 @@ urlpatterns = [
     path('post/<str:slug>/', ShowPost.as_view(), name='post_detail_url'),
     path('post/<str:slug>/edit', EditPost.as_view(), name='post_edit_url'),
     path('post/<str:slug>/delete', DeletePost.as_view(), name='post_delete_url'),
+    path('post/<str:slug>/add_comment', AddComment.as_view(), name='add_comment_url'),
     path('tags/', tag_list, name='tags_list_url'),
     path('tag/create/', TagCreate.as_view(), name='tag_create_url'),
     path('tag/<str:slug>/', ShowTag.as_view(), name='tags_detail_url'),

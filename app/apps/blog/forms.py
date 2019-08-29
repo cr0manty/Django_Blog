@@ -47,15 +47,16 @@ class PostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+
     class Meta:
         model = Comment
         fields = ('author', 'text')
         widgets = {
-            'author': forms.Textarea(attrs={'class': 'form-group'}),
-            'text': forms.TextInput(attrs={'class': 'form-group'}),
+            'author': forms.TextInput(attrs={'class': 'form-control'}),
+            'text': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
         labels = {
-            'author': 'Логин',
+            'author': 'Имя',
             'text': 'Текст',
         }

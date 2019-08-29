@@ -41,7 +41,8 @@
             <div class="container ml-2">
                 {% if request.user.is_authenticated %}
                 <button class="btn btn-danger mt-2 mb-3" data-toggle="modal"
-                        data-target="#add_comment">Добавить комментарий
+                        data-target="#add_comment">
+                    Добавить комментарий
                 </button>
                 {% else %}
                 <p class="text-danger center" style="text-align: center;">
@@ -55,28 +56,9 @@
 
 </div>
 
+{% include 'blog/includes/modal_add_comment.html' %}
+{% include 'blog/includes/modal_delete.html' %}
 
-<div class="modal" tabindex="-1" role="dialog" id="add_comment">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Коменнтировать</h3>
-                <form action="{% url 'post_detail_url' slug=post.slug %}" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="loginInput">Имя</label>
-                        <input type="text" class="form-control" id="loginInput" placeholder="Имя пользователя">
-                    </div>
-                    <div class="form-group">
-                        <label for="CommentInput">Текст комментария</label>
-                        <textarea class="form-control" id="CommentInput" rows="4" placeholder="Текст..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-danger">Отправить</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 
@@ -86,6 +68,8 @@
         document.getElementById("post_comment").hidden = false;
         document.getElementById("add_comment").hidden = true;
    }
+
+
 </script>
 {% endblock %}
 

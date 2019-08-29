@@ -12,10 +12,10 @@ admin.autodiscover()
 # Learn more here: https://docs.djangoproject.com/en/2.1/topics/http/urls/
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('blog/', include('blog.urls')),
     path('user/', include('account.urls')),
     path('shop/', include('shop.urls')),
-
 ]

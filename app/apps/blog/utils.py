@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.db.models import Q
 from django.core.paginator import Paginator
 from .models import Post, Tag
+from django.http import Http404
 
 
 def get_posts_pages(request):
@@ -43,12 +44,14 @@ def get_pages_context(page):
 class ShowPostMixin:
     model = None
     template = None
+    form_comment = None
 
     def get(self, request, slug):
         obj = get_object_or_404(self.model, slug__iexact=slug)
         context = {
             self.model.__name__.lower(): obj,
             'admin_object': obj,
+            'form': self.form_comment(),
             'detail': True
         }
         page = get_comments_pages(request, obj.comment_set.all())
@@ -104,10 +107,7 @@ class DeleteMixin:
     redirect_url = None
 
     def get(self, request, slug):
-        obj = get_object_or_404(self.model, slug__iexact=slug)
-        return render(request, self.template, context={
-            self.model.__name__.lower(): obj}
-                      )
+        raise Http404
 
     def post(self, request, slug):
         obj = get_object_or_404(self.model, slug__iexact=slug)

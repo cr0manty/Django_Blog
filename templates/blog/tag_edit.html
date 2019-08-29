@@ -6,18 +6,7 @@
 
 {% block content %}
 <form action="{% url 'tag_edit_url' slug=tag.slug %}" method="POST">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="form-group">
-        {% if field.errors %}
-        <div class="alert alert-danger">
-            {{ field.errors }}
-        </div>
-        {% endif %}
-        {{ field.label }}
-        {{ field }}
-    </div>
-    {% endfor %}
+    {% include 'template_forms.html' %}
     <button type="submit" class="btn btn-danger">Обновить</button>
 </form>
 {% endblock %}

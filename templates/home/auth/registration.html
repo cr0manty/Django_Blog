@@ -7,7 +7,7 @@
 
 {% block content %}
 <form action="{% url 'registration_url' %}" method="POST">
-    {% include 'home/auth/includes/template_forms.html' %}
+    {% include 'template_forms.html' %}
     <button type="submit" class="btn btn-danger mt-3">Создать</button>
 </form>
 {% endblock %}

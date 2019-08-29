@@ -74,4 +74,3 @@ class ForgotPassForm(forms.Form):
         label='Подтвердите пароль',
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
-

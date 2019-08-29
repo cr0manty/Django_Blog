@@ -10,6 +10,7 @@ def home_page(request):
     return render(request, 'home/index.html')
 
 
+#TODO ошибка в случае ошибки
 class LoginUser(View):
     def get(self, request):
         form = LoginForm()
@@ -32,6 +33,7 @@ class LoginUser(View):
         return redirect('home_url')
 
 
+#TODO ошибка в случае ошибки
 class RegisterUser(View):
     def get(self, request):
         form = RegistrationForm()
@@ -48,6 +50,7 @@ class RegisterUser(View):
         return redirect('registration_url')
 
 
+#TODO ошибка в случае ошибки
 class LogoutUser(LoginRequiredMixin, View):
     raise_exception = True
 
@@ -56,6 +59,7 @@ class LogoutUser(LoginRequiredMixin, View):
         return redirect('home_url')
 
 
+#TODO ошибка в случае ошибки
 class ForgotPass(View):
     def get(self, request):
         form = ForgotPassForm()
