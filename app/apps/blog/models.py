@@ -1,5 +1,6 @@
 from django.db import models
-from django.shortcuts import reverse, redirect
+from django.shortcuts import reverse
+from django.contrib.auth.models import User
 from slugify import slugify_url
 from time import time
 
@@ -22,7 +23,10 @@ class Post(models.Model):
 
     def get_comment_add_url(self):
         return reverse('add_comment_url', kwargs={'slug': self.slug})
-    
+
+    def add_author(self, new_author):
+        self.author = new_author
+
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = (slugify_url(self.title) + '-' + str(int(time())))
@@ -66,15 +70,12 @@ class Tag(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    author = models.CharField(max_length=50)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_create = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
 
     def __str__(self):
         return self.author
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-date_create']

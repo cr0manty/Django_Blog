@@ -1,6 +1,7 @@
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import TagForm, PostForm, CommentForm
+from .models import Comment
 from .utils import *
 
 
@@ -10,10 +11,18 @@ class PostCreate(LoginRequiredMixin, CreateMixin, View):
     raise_exception = True
 
 
-class ShowPost(ShowPostMixin, View):
-    model = Post
-    template = 'blog/post.html'
-    form_comment = CommentForm
+class ShowPost(View):
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug__iexact=slug)
+        context = {
+            'post': post,
+            'admin_object': post,
+            'form': CommentForm(),
+            'detail': True
+        }
+        page = get_comments_pages(request, post.comment_set.all())
+        context.update(get_pages_context(page))
+        return render(request, 'blog/post.html', context=context)
 
 
 class EditPost(LoginRequiredMixin, EditMixin, View):
@@ -41,9 +50,14 @@ class TagCreate(LoginRequiredMixin, CreateMixin, View):
 
 
 class ShowTag(ShowPostMixin, View):
-    model = Tag
-    template = 'blog/tag.html'
-    raise_exception = True
+    def get(self, request, slug):
+        tag = get_object_or_404(Tag, slug__iexact=slug)
+        context = {
+            'tag': tag,
+            'admin_object': tag,
+            'detail': True
+        }
+        return render(request, 'blog/tag.html', context=context)
 
 
 class EditTag(LoginRequiredMixin, EditMixin, View):
@@ -73,8 +87,26 @@ class AddComment(View):
         obj = CommentForm(request.POST)
         if obj.is_valid():
             post.comment_set.create(
-                author=obj.cleaned_data.get('author'),
+                author=request.user,
                 text=obj.cleaned_data.get('text')
             )
-            #TODO ошибка в случае ошибки
+            # TODO ошибка в случае ошибки
         return redirect(post.get_absolute_url())
+
+
+class DeleteComment(View):
+    def get(self, request, slug, id):
+        obj = get_object_or_404(Comment, id=id)
+        obj.delete()
+        return redirect('post_detail_url', slug=slug)
+
+
+class EditComment(View):
+    def get(self, request, slug, id):
+        return HttpResponse()
+
+    def post(self, request, slug, id):
+        com = get_object_or_404(Comment, id=id)
+        form = CommentForm(request.POST, instance=com)
+        form.save()
+        return redirect('post_detail_url', slug=slug)

@@ -10,14 +10,14 @@
     <div class="card-header">
         <div class="row" style="color:white;">
             <div class="col"><h1>{{ post.title }}</h1></div>
-            <div class="col-md-3" style="color: rgba(125, 125, 125, 1);">{{ post.date_create }}</div>
+            <div class="col-md-3 date_comment">{{ post.date_create }}</div>
         </div>
     </div>
     <div class="card-body">
         <p class="card-text">{{ post.body }}</p>
     </div>
     <div class="card-footer text-muted">
-        <p id="comments_label">Коментарии:</p>
+        <p id="comments_label" style="color: #989898;">Коментарии:</p>
         <hr/>
         {% if page.object_list %}
         <div id="comment-show">
@@ -26,17 +26,32 @@
                     {% for comment in page.object_list %}
                     <li class="list-group-item comment-list" id="comments_list">
                         <div class="row" style="color:white;">
-                            <div class="col">{{ comment.author }}</div>
-                            <div class="col">{{ comment.date_create }}</div>
+                            <h5 class="col">{{ comment.author }}</h5>
+                            <div class="dropdown" style="margin-right: 20px; margin-top: 0px;">
+                                <a class="dropdown-toggle" id="comment_action"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="comment_action">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#change_comment"
+                                       href="{% url 'comment_edit_url' slug=post.slug id=comment.id %}">
+                                        Изменить
+                                    </a>
+                                    <a class="dropdown-item"
+                                       href="{% url 'comment_delete_url' slug=post.slug id=comment.id %}">
+                                        Удалить
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <hr>
+                        <hr style="margin-top: 0px;"/>
                         <p>{{ comment.text }}</p>
+                        <hr style="margin-top: 25px; margin-bottom: 5px;"/>
+                        <div class="date_comment">{{ comment.date_create }}</div>
                     </li>
                     {% endfor %}
                 </ul>
                 {% include 'blog/includes/template_pages.html' %}
                 {% endif %}
-
             </div>
             <div class="container ml-2">
                 {% if request.user.is_authenticated %}
@@ -55,8 +70,7 @@
     </div>
 
 </div>
-
-{% include 'blog/includes/modal_add_comment.html' %}
+{% include 'blog/includes/modal_comment_form.html' %}
 {% include 'blog/includes/modal_delete.html' %}
 
 {% endblock %}
@@ -68,6 +82,8 @@
         document.getElementById("post_comment").hidden = false;
         document.getElementById("add_comment").hidden = true;
    }
+
+
 
 
 </script>

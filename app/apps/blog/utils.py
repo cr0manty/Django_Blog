@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.urls import reverse
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -71,6 +71,8 @@ class CreateMixin:
     def post(self, request):
         obj = self.model(request.POST)
         if obj.is_valid():
+            if request.user.is_authenticated:
+                obj.add_author(request.user)
             return redirect(obj.save())
         return render(request, self.template, context={
             'form': obj}

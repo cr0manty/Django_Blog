@@ -13,6 +13,9 @@ html {
     color: white;
 }
 
+a, p , .card p{
+    color: white;
+}
 
 .card {
     background-color: #303030!important;
@@ -124,12 +127,6 @@ a.edit, a.delete {
     width: 100%;
 }
 
-#footer a, p {
-    color: #989898;
-    text-decoration: none;
-    position: 20px;
-}
-
 #comments_list {
    border: 1px solid rgb(81, 81, 81);
    border-radius: 1rem;
@@ -150,11 +147,13 @@ hr {
     color: rgba(125, 125, 125, 1)!important;
 }
 
-.card p {
-   color: white;
+
+#footer a, p {
+    color: #989898;
+    text-decoration: none;
 }
 
-#comments_label {
+.comments_label {
     color: rgba(125, 125, 125, 1);
 }
 
@@ -170,4 +169,8 @@ hr {
 .modal-header {
     display: block;
     border-bottom: none
+}
+
+.date_comment {
+    color: rgb(125, 125, 125);
 }

@@ -1,11 +1,10 @@
-
 <div class="modal" tabindex="-1" role="dialog" id="modal_delete">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <form action="{{ post.get_delete_url }}" method="post">
                     {% csrf_token %}
-                    <h3>Вы точно хотите удалить <b>{{ post.title|title }}</b>?</h3>
+                    <h3>Вы точно хотите удалить?</h3>
                     <button type="submit" name="button" class="btn btn-danger">Удалить</button>
                     <a class="btn btn-outline-danger" href="{{ post.get_absolute_url }}">Отмена</a>
                 </form>
@@ -13,3 +12,4 @@
         </div>
     </div>
 </div>
+

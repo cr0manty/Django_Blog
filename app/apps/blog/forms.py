@@ -24,6 +24,11 @@ class TagForm(forms.ModelForm):
 
 
 class PostForm(forms.ModelForm):
+    author = None
+
+    def add_author(self, author):
+        self.author = author
+
     class Meta:
         model = Post
         fields = ('title', 'body', 'tags')
@@ -50,13 +55,11 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('author', 'text')
+        fields = ['text']
         widgets = {
-            'author': forms.TextInput(attrs={'class': 'form-control'}),
             'text': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
         labels = {
-            'author': 'Имя',
             'text': 'Текст',
         }

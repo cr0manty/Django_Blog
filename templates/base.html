@@ -73,12 +73,15 @@
                 <a class="nav-link" href="{% url 'registration_url' %}">Регистрация</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'login_url' %}">Вход</a>
+                <a class="nav-link" data-toggle="modal" data-target="#login_modal" href=""
+                   >Вход</a>
             </li>
             {% endif %}
         </ul>
     </div>
 </nav>
+
+{% include 'home/includes/login_modal.html' %}
 <div class="container mt-5">
     <div class="row">
         <div class="col-6 offset-md-3">
@@ -87,6 +90,7 @@
         </div>
     </div>
 </div>
+
 
 {% block shop %}
 {% endblock %}
@@ -98,7 +102,8 @@
     {% endblock %}
 </div>
 {% endif %}
-<div class="navbar navbar-default navbar-fixed-bottom" id="footer">
+
+<footer class="navbar navbar-default navbar-fixed-bottom" id="footer">
     <div class="container">
         <p>© 2019 -
             <a class="navbar-text pull-left" href="mailto:denys.dudka.mail@gmail.com">
@@ -107,6 +112,6 @@
         </p>
         <p><a href="https://github.com/cr0manty" target="_blank">GitHub</a></p>
     </div>
-</div>
+</footer>
 </body>
 </html>
