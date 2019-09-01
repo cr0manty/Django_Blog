@@ -84,12 +84,15 @@ class AddComment(View):
 
     def post(self, request, slug):
         post = Post.objects.get(slug__iexact=slug)
-        obj = CommentForm(request.POST)
-        if obj.is_valid():
-            post.comment_set.create(
-                author=request.user,
-                text=obj.cleaned_data.get('text')
-            )
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            try:
+                post.comment_set.create(
+                    author=request.user,
+                    text=form.cleaned_data.get('text')
+                )
+            except:
+                return redirect(post.get_absolute_url())
             # TODO ошибка в случае ошибки
         return redirect(post.get_absolute_url())
 
