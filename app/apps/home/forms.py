@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.core import validators
 
 
 class RegistrationForm(forms.Form):
@@ -17,7 +18,7 @@ class RegistrationForm(forms.Form):
     )
     email = forms.EmailField(
         label='Email',
-        widget=forms.EmailInput(attrs={'class': 'form-control'})
+        widget=forms.EmailInput(attrs={'class': 'form-control'}),
     )
     password = forms.CharField(
         label='Пароль',
@@ -49,7 +50,7 @@ class RegistrationForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(
         label='Логин',
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
     )
     password = forms.CharField(
         label='Пароль',
