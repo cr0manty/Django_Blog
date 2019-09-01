@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{ user.username|title }} | {{ block.super }}
+{{ user.username|title }}
 {% endblock %}
 
 
@@ -14,7 +14,9 @@
         <h1 class="username">{{ user.username|title }}</h1>
         <p> {{ user.date_joined }}</p>
         <p> {{ user.last_login }}</p>
+        {% if user.username == request.user.username %}
         <a class="btn btn-outline-danger" href="{% url 'logout_url' %}">Выход</a>
+        {% endif %}
     </div>
 
 </div>

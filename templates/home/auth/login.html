@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block title %}
-Вход | {{ block.super }}
+Вход
 {% endblock %}
 
 {% block content %}
 <form action="{% url 'login_url' %}" method="POST">
+    <h1>Вход</h1>
     {% include 'template_forms.html' %}
     <div class="row">
         <button type="submit" class="btn btn-danger"

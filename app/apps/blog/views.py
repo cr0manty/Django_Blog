@@ -102,9 +102,6 @@ class DeleteComment(View):
 
 
 class EditComment(View):
-    def get(self, request, slug, id):
-        return HttpResponse()
-
     def post(self, request, slug, id):
         com = get_object_or_404(Comment, id=id)
         form = CommentForm(request.POST, instance=com)

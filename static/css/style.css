@@ -6,10 +6,9 @@
 html {
     position: relative;
     min-height: 100%;
-    color: white;
 }
 
-.form-group, .dropdown-menu a, h3 {
+.form-group, .dropdown-menu a, h3, label, h1 {
     color: white;
 }
 
@@ -85,6 +84,8 @@ a, p , .card p{
 body {
     background-color: #1a1a1a;
     margin-bottom: 60px;
+    color: white;
+
 }
 
 .bg-dark {
@@ -173,4 +174,8 @@ hr {
 
 .date_comment {
     color: rgb(125, 125, 125);
+}
+
+.dropdown-item {
+    color: white;
 }

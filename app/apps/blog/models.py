@@ -74,9 +74,6 @@ class Comment(models.Model):
     date_create = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
 
-    def __str__(self):
-        return self.author
-
     class Meta:
         ordering = ['-date_create']
         verbose_name = 'Комментарий'

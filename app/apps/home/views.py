@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import logout, login
 from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate
-from .forms import LoginForm, RegistrationForm, ForgotPassForm
+from .forms import *
 
 
 def home_page(request):
@@ -21,15 +21,17 @@ class LoginUser(View):
     def post(self, request):
         form = LoginForm(request.POST)
         if form.is_valid():
+            cd = form.cleaned_data
             user = authenticate(
-                username=form.cleaned_data.get('username', ''),
-                password=form.cleaned_data.get('password', '')
+                username=cd.get('username', ''),
+                password=cd.get('password', '')
             )
             if user is not None:
                 login(request, user)
-                return redirect('user_url', username=form.cleaned_data.get('username'))
+                return redirect('user_url', cd.get('username'))
             else:
-                return redirect('login_url')
+                raise forms.ValidationError('Пользователь с таким\
+                 логином и паролем не найден!')
         return redirect('home_url')
 
 
@@ -50,7 +52,6 @@ class RegisterUser(View):
         return redirect('registration_url')
 
 
-#TODO ошибка в случае ошибки
 class LogoutUser(LoginRequiredMixin, View):
     raise_exception = True
 
@@ -68,6 +69,21 @@ class ForgotPass(View):
         })
 
     def post(self, request):
+        form = ForgotPassForm(request.POST)
+        if form.is_valid():
+            try:
+                cd = form.cleaned_data
+                user = User.objects.get(
+                    email=cd.get('email'),
+                    username=cd.get('username'),
+                )
+            except:
+                return redirect('login_url')
+            if User is not None:
+                if cd.get('new_password') ==\
+                        cd.get('new_password2'):
+                    user.set_password(cd.get('new_password'))
+                    user.save()
         return redirect('login_url')
 
 

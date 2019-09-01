@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <title>
         {% block title %}
-        Cr0manty
-        {% endblock %}
+        {% endblock %} | Cr0manty
     </title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -73,15 +72,13 @@
                 <a class="nav-link" href="{% url 'registration_url' %}">Регистрация</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#login_modal" href=""
-                   >Вход</a>
+                <a class="nav-link" href="{% url 'login_url' %}">Вход</a>
             </li>
             {% endif %}
         </ul>
     </div>
 </nav>
 
-{% include 'home/includes/login_modal.html' %}
 <div class="container mt-5">
     <div class="row">
         <div class="col-6 offset-md-3">
