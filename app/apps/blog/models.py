@@ -28,8 +28,7 @@ class Post(models.Model):
         self.author = new_author
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = (slugify_url(self.title) + '-' + str(int(time())))
+        self.slug = (slugify_url(self.title) + '-' + str(int(time())))
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -55,8 +54,7 @@ class Tag(models.Model):
         return reverse('tag_delete_url', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify_url(self.title)
+        self.slug = slugify_url(self.title)
         super().save(*args, **kwargs)
 
     def __str__(self):

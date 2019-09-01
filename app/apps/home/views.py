@@ -30,8 +30,8 @@ class LoginUser(View):
                 login(request, user)
                 return redirect('user_url', cd.get('username'))
             else:
-                raise forms.ValidationError('Пользователь с таким\
-                 логином и паролем не найден!')
+                form.add_error('username', 'ользователь с таким логином или авролем не найден')
+                return redirect('login_url')
         return redirect('home_url')
 
 
