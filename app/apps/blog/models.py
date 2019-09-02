@@ -71,6 +71,13 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_create = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
+    is_edit = models.BooleanField(default=False)
+
+    def get_comment_delete_url(self):
+        return reverse('comment_delete_url', kwargs={
+            'id': self.id,
+            'slug': self.post.slug
+        })
 
     class Meta:
         ordering = ['-date_create']

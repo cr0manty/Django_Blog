@@ -179,3 +179,9 @@ hr {
 .dropdown-item {
     color: white;
 }
+
+.badge {
+    font-size: 60%;
+    background-color: #252525;
+    color: rgb(125, 125, 125);
+}

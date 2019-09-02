@@ -98,15 +98,17 @@ class AddComment(View):
 
 
 class DeleteComment(View):
-    def get(self, request, slug, id):
-        obj = get_object_or_404(Comment, id=id)
-        obj.delete()
+    def post(self, request, slug, id):
+        comment = Comment.objects.get(id=id)
+        comment.delete()
         return redirect('post_detail_url', slug=slug)
 
 
 class EditComment(View):
     def post(self, request, slug, id):
-        com = get_object_or_404(Comment, id=id)
-        form = CommentForm(request.POST, instance=com)
-        form.save()
+        comment = Comment.objects.get(id=id)
+        comment.is_edit = True
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
         return redirect('post_detail_url', slug=slug)
