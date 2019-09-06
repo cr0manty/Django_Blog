@@ -1,0 +1,46 @@
+{% extends "blog/base_blog.html" %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="row content-text" style="color:white;">
+            <div class="col"><h1>{{ post.title }}</h1></div>
+            <div class="col-md-3 date_comment">{{ post.date_create }}</div>
+        </div>
+        <p id="author_post" style="margin-top: 0.1rem">
+            Автор:
+            <a class="author_link" href="{% url 'user_url' username=post.author %}">
+                {{ post.author }}
+            </a></p>
+    </div>
+    <div class="card-body">
+        <p class="card-text content-text">{{ post.body }}</p>
+    </div>
+    <div class="card-footer text-muted">
+        <p id="comments_label" style="color: #989898;">Коментарии:</p>
+        <hr/>
+                {% include 'blog/includes/comments.html' %}
+    </div>
+</div>
+{% include 'blog/includes/modal_comment_form.html' %}
+{% include 'blog/includes/modal_delete.html' with action=post.get_delete_url id='modal_delete_post' %}
+
+{% endblock %}
+
+{% block script %}
+<script>
+   function comment_new_show(show) {
+        document.getElementById("edit_text").hidden = !show;
+        document.getElementById("comment_text").hidden = show;
+   }
+
+
+</script>
+{% endblock %}
+
+

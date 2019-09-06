@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.db.models import Q
 from django.core.paginator import Paginator
-from .models import Post, Tag
 from django.http import Http404
+from .models import Post, Tag
+from django.contrib.auth.models import User
 
 
 def get_posts_pages(request):
@@ -65,15 +66,16 @@ class CreateMixin:
 
     def get(self, request):
         return render(request, self.template, context={
-            'form': self.model()}
-                      )
+            'form': self.model()
+        })
 
     def post(self, request):
         obj = self.model(request.POST)
         if obj.is_valid():
-            if request.user.is_authenticated:
-                obj.add_author(request.user)
-            return redirect(obj.save())
+            post = obj.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect(post.get_absolute_url())
         return render(request, self.template, context={
             'form': obj}
                       )

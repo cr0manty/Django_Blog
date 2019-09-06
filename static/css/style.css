@@ -16,10 +16,15 @@ a, p , .card p{
     color: white;
 }
 
+a:hover {
+    text-decoration: none;
+    color: #dc3544;
+}
+
 .card {
     background-color: #303030!important;
     color: white;
-    border-radius: 0.5rem;
+    border-radius: 1.1rem;
 }
 
 .card-body {
@@ -158,10 +163,6 @@ hr {
     color: rgba(125, 125, 125, 1);
 }
 
-#comment_post {
-    margin: 20px;
-}
-
 .modal-content {
     background-color: #303030;
     border: none
@@ -173,15 +174,30 @@ hr {
 }
 
 .date_comment {
-    color: rgb(125, 125, 125);
+    color: rgb(125, 125, 125)!important;
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 
 .dropdown-item {
     color: white;
 }
 
-.badge {
+.badge-dark {
     font-size: 60%;
     background-color: #252525;
     color: rgb(125, 125, 125);
+}
+
+#author_post {
+    font-size: 75%;
+    color: rgb(125, 125, 125);
+}
+
+.text-center {
+   font-family: Comic Sans MS;
+}
+
+.content-text {
+    padding-left: 0.4rem;
 }

@@ -26,9 +26,6 @@ class TagForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     author = None
 
-    def add_author(self, author):
-        self.author = author
-
     class Meta:
         model = Post
         fields = ('title', 'body', 'tags')

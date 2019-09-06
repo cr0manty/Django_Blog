@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 def show_user(request, username):
     user = get_object_or_404(User, username__iexact=username)
-    return render(request, 'user/user_page.html', context={
+    return render(request, 'account/user_page.html', context={
         'user': user
     })
 

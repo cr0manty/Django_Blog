@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
@@ -6,6 +7,7 @@ from time import time
 
 
 class Post(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=150, db_index=True)
     slug = models.SlugField(max_length=150, blank=True, unique=True)
     body = models.TextField(blank=True, db_index=True)
@@ -25,7 +27,7 @@ class Post(models.Model):
         return reverse('add_comment_url', kwargs={'slug': self.slug})
 
     def add_author(self, new_author):
-        self.author = new_author
+        self.author = User(new_author)
 
     def save(self, *args, **kwargs):
         self.slug = (slugify_url(self.title) + '-' + str(int(time())))

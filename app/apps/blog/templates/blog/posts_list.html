@@ -1,0 +1,27 @@
+{% extends "blog/base_blog.html" %}
+{% load static %}
+{% block title %}
+Блог
+{% endblock %}
+
+{% block content %}
+
+{% if page.object_list %}
+{% for post in page.object_list %}
+{% include 'blog/includes/template_post_card.html' %}
+{% endfor %}
+{% include 'blog/includes/template_pages.html' %}
+{% else %}
+<div class="text-center">
+    <h1 id="no_posts" class="text-muted center">Посты еще не созданы. Создать?</h1>
+
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'post_create_url' %}" class="btn btn-danger">Создать</a>
+    {% endif %}
+
+    <div style="height: 30px;"></div>
+    <img src="{% static 'img/no_posts.png' %}" class="rounded img_post">
+</div>
+{% endif %}
+
+{% endblock %}
