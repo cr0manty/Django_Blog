@@ -4,15 +4,14 @@
 {{ post.title }}
 {% endblock %}
 
-{% block content %}
-
+{% block blog_content %}
 <div class="card mb-4">
     <div class="card-header">
         <div class="row content-text" style="color:white;">
-            <div class="col"><h1>{{ post.title }}</h1></div>
+            <h1 class="col">{{ post.title }}</h1>
             <div class="col-md-3 date_comment">{{ post.date_create }}</div>
         </div>
-        <p id="author_post" style="margin-top: 0.1rem">
+        <p id="author_post" style="margin-top: 0.1rem" class="content-text">
             Автор:
             <a class="author_link" href="{% url 'user_url' username=post.author %}">
                 {{ post.author }}
@@ -20,11 +19,12 @@
     </div>
     <div class="card-body">
         <p class="card-text content-text">{{ post.body }}</p>
+
     </div>
     <div class="card-footer text-muted">
         <p id="comments_label" style="color: #989898;">Коментарии:</p>
         <hr/>
-                {% include 'blog/includes/comments.html' %}
+        {% include 'blog/includes/comments.html' %}
     </div>
 </div>
 {% include 'blog/includes/modal_comment_form.html' %}

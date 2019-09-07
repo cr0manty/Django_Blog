@@ -4,7 +4,7 @@
 Изменение поста '{{ post.title|title }}'
 {% endblock %}
 
-{% block content %}
+{% block blog_content %}
 <form action="{% url 'post_edit_url' slug=post.slug %}" method="POST">
     {% include 'template_forms.html' %}
     <button type="submit" class="btn btn-danger">Обновить</button>

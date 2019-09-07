@@ -6,18 +6,24 @@
 {% endblock %}
 
 {% block content %}
-<form action="{% url 'login_url' %}" method="POST">
+
+<form action="{% url 'login_url' %}" method="POST" class="center">
     <h1>Вход</h1>
     {% include 'template_forms.html' %}
-    <div class="row">
-        <button type="submit" class="btn btn-danger"
-                style="margin-left:15px;">Войти
+
+    <div class="row" hidden>
+        <button type="submit" class="btn btn-dange"
+                style="margin-left:15px; ">Войти
         </button>
         <a href="{% url 'registration_url' %}" class="btn btn-dark"
            style="margin-left:20px;">Регистрация</a>
         <a href="{% url 'forgot_url' %}" class="btn btn-outline-primary"
-           style="margin-left:20px;">Забыл пароль</a>
+           style="margin-left:20px;"> пароль</a>
     </div>
+    <button type="submit" class="btn btn-danger mb-2">Войти
+    </button>
+    <p>Еще не зарегестрирванны? <a href="{% url 'registration_url' %}">Регистрация</a></p>
+    <p>Забыли <a href="{% url 'forgot_url' %}">Пароль?</a></p>
 </form>
 {% endblock %}
 

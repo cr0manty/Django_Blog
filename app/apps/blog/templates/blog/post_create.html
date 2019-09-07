@@ -4,7 +4,7 @@
 Создание поста
 {% endblock %}
 
-{% block content %}
+{% block blog_content %}
 <form action="{% url 'post_create_url' %}" method="POST">
     {% include 'template_forms.html' %}
     <button type="submit" class="btn btn-danger">Создать</button>

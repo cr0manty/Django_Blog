@@ -4,13 +4,15 @@
 Блог
 {% endblock %}
 
-{% block content %}
+{% block blog_content %}
 
 {% if page.object_list %}
+
 {% for post in page.object_list %}
 {% include 'blog/includes/template_post_card.html' %}
 {% endfor %}
 {% include 'blog/includes/template_pages.html' %}
+
 {% else %}
 <div class="text-center">
     <h1 id="no_posts" class="text-muted center">Посты еще не созданы. Создать?</h1>

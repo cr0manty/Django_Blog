@@ -39,18 +39,6 @@ a:hover {
     color: #dc3544;
 }
 
-.img-thumbnail {
-    border: 2px solid #dee2e6;
-    border-radius: 1.5rem;
-    max-width: 200px;
-    height: 200px;
-}
-
-
-.img-thumbnail:hover {
-    opacity: 0.50;
-}
-
 .page-item.disabled .page-link , .page-link {
     background-color: inherit;
     border-color: #dc3544;
@@ -117,12 +105,6 @@ a.edit, a.delete {
    border: 2px solid rgba(0, 0, 0, 0.09);
 }
 
-.username {
-    color: white;
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
 #footer {
     background-color: rgba(50, 50, 50, 0.83)!important;
     margin-top: 100px;
@@ -141,7 +123,8 @@ a.edit, a.delete {
 
 .list-group-item  {
    border: 1px;
-   border-radius: 1rem;
+   border-radius: 0.25rem;
+   margin-bottom: 0.5rem;
    background-color: #2e2e2e;
 }
 
@@ -150,9 +133,8 @@ hr {
 }
 
 .text-muted {
-    color: rgba(125, 125, 125, 1)!important;
+    color: rgb(125, 125, 125)!important;
 }
-
 
 #footer a, p {
     color: #989898;
@@ -160,7 +142,7 @@ hr {
 }
 
 .comments_label {
-    color: rgba(125, 125, 125, 1);
+    color: rgb(125, 125, 125);
 }
 
 .modal-content {
@@ -201,3 +183,68 @@ hr {
 .content-text {
     padding-left: 0.4rem;
 }
+
+#login_margin {
+    background-color: #dc3544;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+}
+
+.modal-footer {
+    background-color: #f9f9f9;
+}
+
+.center {
+    color: white;
+    border-radius: 1em;
+    padding: 1em;
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+#user_posts {
+    border: 1px solid rgba(121, 121, 121, 0.45);
+    border-radius: 0.5rem;
+    padding: 15px;
+    margin-top: 1.5rem;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 1.5rem;
+  opacity: 0;
+  height: 100%;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.img-thumbnail {
+    padding: 0rem;
+    border: 1px solid rgb(121, 121, 121);
+    border-radius: 1rem;
+    max-width: 200px;
+    height: 200px;
+}
+
+.upload-btn-wrapper:hover {
+    opacity: 0.5;
+}
+
+

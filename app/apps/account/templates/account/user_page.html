@@ -5,27 +5,56 @@
 {{ user.username|title }}
 {% endblock %}
 
-
 {% block content %}
-<div class="row">
-    <div class="container">
-        <img onclick="get_file()" id="upd_image"
-             src="{% static 'img/user-default.png' %}" class="img-thumbnail"/>
-        <h1 class="username">{{ user.username|title }}</h1>
-        <p> {{ user.date_joined }}</p>
-        <p> {{ user.last_login }}</p>
-        {% if user.username == request.user.username %}
-        <a class="btn btn-outline-danger" href="{% url 'logout_url' %}">Выход</a>
-        {% endif %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-3 offset-2">
+            <div class="upload-btn-wrapper">
+                <img src="{% static 'img/user-default.png' %}"
+                     class="img-thumbnail ml-4"/>
+                <input type="file" accept=".png, .jpg, .jpeg" onchange="previewFile()"/>
+            </div>
+            <h1 align="center" style="margin-top: 0.8rem;">{{ user.username|title }}</h1>
+        </div>
+        <div class="col-6">
+            <p> Дата регистрации: <br>{{ user.date_joined }}</p>
+            <p> Последнее посещение: <br>{{ user.last_login }}</p>
+        </div>
+        <div class="col-8 offset-2" id="user_posts">
+            <h3>Посты пользователя:</h3>
+            <hr>
+            {% if posts %}
+            <div class="list-group">
+                {% for post in posts %}
+                <a class="list-group-item" href="{{ post.get_absolute_url }}">
+                    {{ post.title }}
+                </a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-danger">Пользователь еще не создавал посты!</p>
+            {% endif %}
+        </div>
     </div>
 
 </div>
 {% endblock %}
 
+
 {% block script %}
-<script>
-    function get_file() {
-        document.getElementById("upd_image").click();
+function previewFile() {
+    var preview = document.querySelector('img');
+    var file = document.querySelector('input[type=file]').files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
     }
-</script>
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "";
+    }
+}
 {% endblock %}

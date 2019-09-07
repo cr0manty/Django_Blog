@@ -6,7 +6,7 @@
             <li class="list-group-item comment-list" id="comments_list">
                 <div class="row" style="color:white;">
                     <h5 class="col">
-                        <a href="{% url 'user_url' username=comment.author %}">
+                        <a href="{% url 'user_url' username=comment.author %}" class="content-text">
                             {{ comment.author }}
                         </a>
                         {% if comment.is_edit %}
@@ -31,7 +31,7 @@
                     </div>
                     {% endif %}
                 </div>
-                <hr style="margin-top: 0px;"/>
+                <hr style="margin-top: 0px; margin-bottom: 10px;"/>
                 <p class="content-text">{{ comment.text }}</p>
                 <form action="{% url 'comment_edit_url' slug=post.slug id=comment.id %}"
                       method="post" id="edit_text" hidden>
