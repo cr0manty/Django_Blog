@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.core import validators
+from django.core.files.images import get_image_dimensions
+from .models import Profile
 
 
 class RegistrationForm(forms.Form):
@@ -57,7 +58,6 @@ class LoginForm(forms.Form):
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
 
-
 class ForgotPassForm(forms.Form):
     email = forms.CharField(
         label='Email',
@@ -75,3 +75,5 @@ class ForgotPassForm(forms.Form):
         label='Подтвердите пароль',
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
+
+

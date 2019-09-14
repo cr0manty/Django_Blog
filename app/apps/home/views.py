@@ -3,6 +3,8 @@ from django.contrib.auth import logout, login
 from django.views.generic.base import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate
+from django.core.exceptions import ValidationError
+
 from .forms import *
 
 
@@ -30,7 +32,6 @@ class LoginUser(View):
                 login(request, user)
                 return redirect('user_url', cd.get('username'))
             else:
-                form.add_error('username', 'ользователь с таким логином или авролем не найден')
                 return redirect('login_url')
         return redirect('home_url')
 
