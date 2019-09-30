@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.core.files.images import get_image_dimensions
-from .models import Profile
+from django.core.exceptions import ValidationError
 
 
 class RegistrationForm(forms.Form):
@@ -19,7 +18,7 @@ class RegistrationForm(forms.Form):
     )
     email = forms.EmailField(
         label='Email',
-        widget=forms.EmailInput(attrs={'class': 'form-control'}),
+        widget=forms.EmailInput(attrs={'class': 'form-control'})
     )
     password = forms.CharField(
         label='Пароль',
@@ -44,7 +43,7 @@ class RegistrationForm(forms.Form):
     def clean(self):
         cd = self.cleaned_data
         if cd.get('password') != cd.get('password_confirm'):
-            self.add_error('password_confirm', 'Пароли не совпадают!')
+            raise ValidationError('Пароли должны совпадать')
         return cd
 
 
@@ -57,6 +56,7 @@ class LoginForm(forms.Form):
         label='Пароль',
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
+
 
 class ForgotPassForm(forms.Form):
     email = forms.CharField(

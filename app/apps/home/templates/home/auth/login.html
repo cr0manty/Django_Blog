@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "home/base_home.html" %}
 {% load static %}
 
 {% block title %}
 Вход
 {% endblock %}
 
-{% block content %}
+{% block home_content %}
 
 <form action="{% url 'login_url' %}" method="POST" class="center">
     <h1>Вход</h1>
