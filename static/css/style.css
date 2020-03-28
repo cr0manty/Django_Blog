@@ -198,12 +198,9 @@ hr {
 .center {
     color: white;
     border-radius: 1em;
-    padding: 1em;
     position: absolute;
     top: 250px;
     left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
 }
 
 #user_posts {
